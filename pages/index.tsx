@@ -5,9 +5,10 @@ import styles from "../styles/Home.module.css";
 
 type Props = {
   timestamp: string;
+  url: string;
 };
 
-const Home: NextPage<Props> = ({ timestamp }) => {
+const Home: NextPage<Props> = ({ timestamp, url }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -22,6 +23,7 @@ const Home: NextPage<Props> = ({ timestamp }) => {
         </h1>
 
         <h2>Timestamp: {timestamp}</h2>
+        <h3>Timestamp: {url}</h3>
       </main>
     </div>
   );
@@ -30,9 +32,12 @@ const Home: NextPage<Props> = ({ timestamp }) => {
 export async function getStaticProps() {
   const timestamp = new Date().toLocaleString();
 
+  const url = process.env.URL;
+
   return {
     props: {
       timestamp,
+      url,
     },
     revalidate: 60,
   };
